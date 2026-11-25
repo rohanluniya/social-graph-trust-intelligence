@@ -58,7 +58,7 @@ Requires only Python `3.12` and [`uv`](https://docs.astral.sh/uv/).
 
 ```bash
 # 1. Clone and enter the repository
-git clone https://github.com/ankdeshm/social-graph-trust-intelligence.git
+git clone https://github.com/rohanluniya/social-graph-trust-intelligence.git
 cd social-graph-trust-intelligence
 
 # 2. One-command setup, Iceberg V2 pipeline run, and live Control Tower on http://127.0.0.1:8050
