@@ -1,0 +1,5 @@
+# Container-isolated PySpark + GraphFrames dependencies for apache/spark:4.1.4-scala2.13-java17-python3-ubuntu
+pyspark==4.1.4
+pyarrow==25.0.1
+numpy==2.5.5
+fastavro==1.13.1

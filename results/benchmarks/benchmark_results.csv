@@ -1,0 +1,4 @@
+profile,seed,total_events_generated,active_nodes,active_edges,total_pipeline_ms,events_per_sec,full_graph_compute_ms,incremental_struct_ms,incremental_with_pr_ms,incremental_speedup_x,incremental_max_abs_diff,naive_skew_ratio,vertex_cut_skew_ratio,skew_reduction_pct,naive_two_hop_p95_ms,vertex_cut_two_hop_p95_ms,hll_mean_rel_error_pct,hll_memory_reduction_ratio,trust_precision,trust_recall,trust_f1,celebrity_fp,modularity_q,dq_passed,dq_total
+smoke,42,10354,396,6588,908.321,11317.6,23.404,0.596,3.888,39.27,0.0,1.5,1.071,28.6,0.289,0.068,2.209,22.28,0.9524,1.0,0.9756,0,0.4385,9,9
+local,42,47789,1588,32380,2765.76,17083.2,135.306,2.889,19.688,46.83,0.0,1.397,1.071,23.34,1.357,0.324,3.551,84.93,0.9742,0.9934,0.9837,0,0.4935,9,9
+stress,42,194343,5970,138745,13420.085,14327.7,684.623,14.942,102.491,45.82,0.0,1.275,1.057,17.1,8.549,2.659,3.595,320.07,0.9898,0.9974,0.9936,0,0.5358,9,9

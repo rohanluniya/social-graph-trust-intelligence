@@ -1,0 +1,47 @@
+groups:
+  - name: social_graph_trust_alerts
+    rules:
+      - alert: SGTIDataQualityFailure
+        expr: sgti_dq_checks_failed > 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Social Graph DQ checks failed ({{ $value }} failing checks)"
+          runbook: "docs/incidents/incident-001-supernode-skew-and-erasure-recovery.md"
+
+      - alert: SGTIPartitionSkewRegression
+        expr: sgti_partition_skew_ratio{strategy="skew_aware_vertex_cut"} > 1.5
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Vertex-cut partition skew ratio exceeded 1.5x ({{ $value }})"
+          runbook: "docs/incidents/incident-001-supernode-skew-and-erasure-recovery.md"
+
+      - alert: SGTIErasureLatencySLOBreach
+        expr: histogram_quantile(0.95, sum(rate(sgti_erasure_propagation_ms_bucket[5m])) by (le)) > 2000
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "GDPR right-to-erasure p95 propagation latency breached 2000ms SLO"
+          runbook: "docs/incidents/incident-001-supernode-skew-and-erasure-recovery.md"
+
+      - alert: SGTIHighDLQRate
+        expr: sum(rate(sgti_dlq_events_total[5m])) > 10
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Elevated schema-invalid poison event rate quarantined to DLQ"
+          runbook: "docs/incidents/incident-001-supernode-skew-and-erasure-recovery.md"
+
+      - alert: SGTIApiP95LatencyHigh
+        expr: histogram_quantile(0.95, sum(rate(sgti_api_request_latency_seconds_bucket[5m])) by (le)) > 0.25
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Social Graph API p95 latency exceeded 250ms SLO"
+          runbook: "docs/incidents/incident-001-supernode-skew-and-erasure-recovery.md"

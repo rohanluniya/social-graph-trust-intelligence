@@ -1,0 +1,872 @@
+{
+  "generated_at": "2026-11-25T05:35:23.632318+00:00",
+  "hardware": {
+    "os": "Darwin 24.6.0",
+    "machine": "arm64",
+    "python": "3.12.8",
+    "cpu_cores_logical": 14,
+    "ram_gib": 48.0
+  },
+  "profiles": [
+    {
+      "run_id": "run_smoke_42_6d57b9b2",
+      "trace_id": "046ded1e38bb89b68db651b6e96e9c52",
+      "profile": "smoke",
+      "seed": 42,
+      "snapshot_version": 1,
+      "iceberg_edge_snapshot_id": 6604709668073429628,
+      "last_materialized_at": "2026-11-25T05:35:06.701783+00:00",
+      "total_pipeline_ms": 908.321,
+      "total_events_generated": 10354,
+      "valid_events_ingested": 10137,
+      "duplicates_deduped": 202,
+      "dlq_quarantined": 15,
+      "active_nodes": 396,
+      "active_edges": 6588,
+      "temporal_edge_versions": 7027,
+      "erased_users": 4,
+      "erased_seed_users": [
+        "usr_000397",
+        "usr_000398",
+        "usr_000399",
+        "usr_000400"
+      ],
+      "blocked_pairs": 94,
+      "supernode_count": 4,
+      "component_count": 3,
+      "largest_component_size": 380,
+      "community_count": 13,
+      "modularity_q": 0.4385,
+      "full_graph_compute_ms": 23.404,
+      "incremental_struct_ms": 0.596,
+      "incremental_with_pr_ms": 3.888,
+      "incremental_speedup_x": 39.27,
+      "incremental_parity_verified": true,
+      "incremental_max_abs_diff": 0.0,
+      "incremental_pr_max_abs_diff": 0.0,
+      "partitioning": {
+        "num_partitions": 16,
+        "supernode_threshold": 80,
+        "supernode_count": 4,
+        "naive_strategy": "naive_source_hash",
+        "naive_max_edges": 1235,
+        "naive_mean_edges": 823.5,
+        "naive_skew_ratio": 1.5,
+        "naive_cv": 0.2706,
+        "naive_two_hop_p95_ms": 0.289,
+        "vertex_cut_strategy": "skew_aware_vertex_cut",
+        "vertex_cut_max_edges": 882,
+        "vertex_cut_mean_edges": 823.5,
+        "vertex_cut_skew_ratio": 1.071,
+        "vertex_cut_cv": 0.0518,
+        "vertex_cut_two_hop_p95_ms": 0.068,
+        "skew_reduction_pct": 28.6,
+        "replication_factor": 1.071,
+        "naive_partition_loads": [
+          1235,
+          822,
+          826,
+          865,
+          1221,
+          948,
+          985,
+          471,
+          691,
+          757,
+          882,
+          532,
+          559,
+          1068,
+          701,
+          613
+        ],
+        "vertex_cut_partition_loads": [
+          850,
+          835,
+          822,
+          812,
+          868,
+          880,
+          882,
+          865,
+          830,
+          801,
+          818,
+          846,
+          819,
+          751,
+          739,
+          758
+        ]
+      },
+      "sketches": {
+        "hll_precision": 10,
+        "hll_registers": 1024,
+        "hll_mean_rel_error_pct": 2.209,
+        "hll_p95_rel_error_pct": 2.926,
+        "exact_memory_bytes": 9034240,
+        "hll_memory_bytes": 405504,
+        "memory_reduction_ratio": 22.28,
+        "cms_depth": 5,
+        "cms_width": 2048,
+        "cms_zero_underestimation_verified": true,
+        "cms_mean_overcount": 0.0
+      },
+      "trust_evaluation": {
+        "note": "Evaluated strictly against synthetic benchmark ground-truth labels (bot_swarm + coordinated_ring vs organic + celebrity); not real-world moderation claims.",
+        "threshold": 45.0,
+        "true_positives": 40,
+        "false_positives": 2,
+        "true_negatives": 354,
+        "false_negatives": 0,
+        "precision": 0.9524,
+        "recall": 1.0,
+        "f1_score": 0.9756,
+        "false_positive_rate": 0.0056,
+        "celebrity_false_positives": 0,
+        "celebrity_total": 4,
+        "false_positive_analysis": [
+          {
+            "user_id": "usr_000050",
+            "synthetic_label": "organic",
+            "risk_score": 46.33,
+            "top_reasons": [
+              "BOT_OUTBOUND_BURST",
+              "ELEVATED_REPORT_VELOCITY",
+              "HIGH_BLOCK_RATIO"
+            ],
+            "attributions": {
+              "outbound_burst_velocity": 18.33,
+              "low_reciprocity_fanout": 0.0,
+              "coordinated_ring_jaccard": 0.0,
+              "report_velocity_signal": 16.0,
+              "block_ratio_signal": 12.0
+            }
+          },
+          {
+            "user_id": "usr_000057",
+            "synthetic_label": "organic",
+            "risk_score": 46.33,
+            "top_reasons": [
+              "BOT_OUTBOUND_BURST",
+              "ELEVATED_REPORT_VELOCITY",
+              "HIGH_BLOCK_RATIO"
+            ],
+            "attributions": {
+              "outbound_burst_velocity": 18.33,
+              "low_reciprocity_fanout": 0.0,
+              "coordinated_ring_jaccard": 0.0,
+              "report_velocity_signal": 16.0,
+              "block_ratio_signal": 12.0
+            }
+          }
+        ]
+      },
+      "risk_tier_counts": {
+        "low": 354,
+        "medium": 0,
+        "high": 18,
+        "critical": 24
+      },
+      "dq_passed": 9,
+      "dq_total": 9,
+      "serving_rebuild_ms": 49.685,
+      "iceberg_tables": [
+        {
+          "table": "bronze.social_events",
+          "format_version": 2,
+          "rows": 10137,
+          "data_files": 1,
+          "snapshot_count": 1,
+          "current_snapshot_id": 8434896561790838724
+        },
+        {
+          "table": "bronze.quarantine_dlq",
+          "format_version": 2,
+          "rows": 15,
+          "data_files": 1,
+          "snapshot_count": 1,
+          "current_snapshot_id": 6407557204896983691
+        },
+        {
+          "table": "silver.temporal_edges",
+          "format_version": 2,
+          "rows": 7027,
+          "data_files": 1,
+          "snapshot_count": 1,
+          "current_snapshot_id": 6604709668073429628
+        },
+        {
+          "table": "silver.user_blocks_and_deletions",
+          "format_version": 2,
+          "rows": 102,
+          "data_files": 1,
+          "snapshot_count": 1,
+          "current_snapshot_id": 1653294528365094461
+        },
+        {
+          "table": "silver.graph_snapshots",
+          "format_version": 2,
+          "rows": 1,
+          "data_files": 1,
+          "snapshot_count": 1,
+          "current_snapshot_id": 790625277483042879
+        },
+        {
+          "table": "gold.adjacency_partitioned",
+          "format_version": 2,
+          "rows": 6588,
+          "data_files": 1,
+          "snapshot_count": 1,
+          "current_snapshot_id": 9021952273275487485
+        },
+        {
+          "table": "gold.node_graph_features",
+          "format_version": 2,
+          "rows": 396,
+          "data_files": 1,
+          "snapshot_count": 1,
+          "current_snapshot_id": 5587692920229512847
+        },
+        {
+          "table": "gold.communities_and_components",
+          "format_version": 2,
+          "rows": 396,
+          "data_files": 1,
+          "snapshot_count": 1,
+          "current_snapshot_id": 3823570151419793211
+        },
+        {
+          "table": "gold.trust_risk_scores",
+          "format_version": 2,
+          "rows": 396,
+          "data_files": 1,
+          "snapshot_count": 1,
+          "current_snapshot_id": 4161632539414341595
+        },
+        {
+          "table": "quality.dq_results",
+          "format_version": 2,
+          "rows": 9,
+          "data_files": 1,
+          "snapshot_count": 1,
+          "current_snapshot_id": 6088302830603179845
+        }
+      ],
+      "events_per_sec": 11317.6
+    },
+    {
+      "run_id": "run_local_42_e250f084",
+      "trace_id": "9a2e96d1715568974e73f99c878e2ce5",
+      "profile": "local",
+      "seed": 42,
+      "snapshot_version": 1,
+      "iceberg_edge_snapshot_id": 8586985691277588508,
+      "last_materialized_at": "2026-11-25T05:35:09.284397+00:00",
+      "total_pipeline_ms": 2765.76,
+      "total_events_generated": 47789,
+      "valid_events_ingested": 46813,
+      "duplicates_deduped": 936,
+      "dlq_quarantined": 40,
+      "active_nodes": 1588,
+      "active_edges": 32380,
+      "temporal_edge_versions": 34358,
+      "erased_users": 12,
+      "erased_seed_users": [
+        "usr_001589",
+        "usr_001590",
+        "usr_001591",
+        "usr_001592",
+        "usr_001593",
+        "usr_001594",
+        "usr_001595",
+        "usr_001596",
+        "usr_001597",
+        "usr_001598",
+        "usr_001599",
+        "usr_001600"
+      ],
+      "blocked_pairs": 349,
+      "supernode_count": 8,
+      "component_count": 5,
+      "largest_component_size": 1532,
+      "community_count": 41,
+      "modularity_q": 0.4935,
+      "full_graph_compute_ms": 135.306,
+      "incremental_struct_ms": 2.889,
+      "incremental_with_pr_ms": 19.688,
+      "incremental_speedup_x": 46.83,
+      "incremental_parity_verified": true,
+      "incremental_max_abs_diff": 0.0,
+      "incremental_pr_max_abs_diff": 0.0,
+      "partitioning": {
+        "num_partitions": 16,
+        "supernode_threshold": 80,
+        "supernode_count": 8,
+        "naive_strategy": "naive_source_hash",
+        "naive_max_edges": 5654,
+        "naive_mean_edges": 4047.5,
+        "naive_skew_ratio": 1.397,
+        "naive_cv": 0.1403,
+        "naive_two_hop_p95_ms": 1.357,
+        "vertex_cut_strategy": "skew_aware_vertex_cut",
+        "vertex_cut_max_edges": 4336,
+        "vertex_cut_mean_edges": 4047.5,
+        "vertex_cut_skew_ratio": 1.071,
+        "vertex_cut_cv": 0.0482,
+        "vertex_cut_two_hop_p95_ms": 0.324,
+        "skew_reduction_pct": 23.34,
+        "replication_factor": 1.035,
+        "naive_partition_loads": [
+          4859,
+          3808,
+          4164,
+          3793,
+          5654,
+          4165,
+          4360,
+          4120,
+          3830,
+          3910,
+          4121,
+          3495,
+          3324,
+          4245,
+          3575,
+          3337
+        ],
+        "vertex_cut_partition_loads": [
+          4158,
+          4152,
+          4110,
+          4117,
+          4295,
+          4336,
+          4309,
+          4246,
+          4090,
+          3922,
+          3966,
+          3934,
+          3792,
+          3753,
+          3828,
+          3752
+        ]
+      },
+      "sketches": {
+        "hll_precision": 10,
+        "hll_registers": 1024,
+        "hll_mean_rel_error_pct": 3.551,
+        "hll_p95_rel_error_pct": 5.081,
+        "exact_memory_bytes": 138108800,
+        "hll_memory_bytes": 1626112,
+        "memory_reduction_ratio": 84.93,
+        "cms_depth": 5,
+        "cms_width": 2048,
+        "cms_zero_underestimation_verified": true,
+        "cms_mean_overcount": 0.1196
+      },
+      "trust_evaluation": {
+        "note": "Evaluated strictly against synthetic benchmark ground-truth labels (bot_swarm + coordinated_ring vs organic + celebrity); not real-world moderation claims.",
+        "threshold": 45.0,
+        "true_positives": 151,
+        "false_positives": 4,
+        "true_negatives": 1432,
+        "false_negatives": 1,
+        "precision": 0.9742,
+        "recall": 0.9934,
+        "f1_score": 0.9837,
+        "false_positive_rate": 0.0028,
+        "celebrity_false_positives": 0,
+        "celebrity_total": 8,
+        "false_positive_analysis": [
+          {
+            "user_id": "usr_000166",
+            "synthetic_label": "organic",
+            "risk_score": 62.23,
+            "top_reasons": [
+              "COORDINATED_RING_OVERLAP",
+              "BOT_OUTBOUND_BURST",
+              "ELEVATED_REPORT_VELOCITY",
+              "HIGH_BLOCK_RATIO"
+            ],
+            "attributions": {
+              "outbound_burst_velocity": 18.33,
+              "low_reciprocity_fanout": 0.0,
+              "coordinated_ring_jaccard": 15.9,
+              "report_velocity_signal": 16.0,
+              "block_ratio_signal": 12.0
+            }
+          },
+          {
+            "user_id": "usr_000173",
+            "synthetic_label": "organic",
+            "risk_score": 62.23,
+            "top_reasons": [
+              "COORDINATED_RING_OVERLAP",
+              "BOT_OUTBOUND_BURST",
+              "ELEVATED_REPORT_VELOCITY",
+              "HIGH_BLOCK_RATIO"
+            ],
+            "attributions": {
+              "outbound_burst_velocity": 18.33,
+              "low_reciprocity_fanout": 0.0,
+              "coordinated_ring_jaccard": 15.9,
+              "report_velocity_signal": 16.0,
+              "block_ratio_signal": 12.0
+            }
+          },
+          {
+            "user_id": "usr_000180",
+            "synthetic_label": "organic",
+            "risk_score": 67.6,
+            "top_reasons": [
+              "COORDINATED_RING_OVERLAP",
+              "BOT_OUTBOUND_BURST",
+              "ELEVATED_REPORT_VELOCITY",
+              "HIGH_BLOCK_RATIO"
+            ],
+            "attributions": {
+              "outbound_burst_velocity": 18.33,
+              "low_reciprocity_fanout": 0.0,
+              "coordinated_ring_jaccard": 21.27,
+              "report_velocity_signal": 16.0,
+              "block_ratio_signal": 12.0
+            }
+          },
+          {
+            "user_id": "usr_000187",
+            "synthetic_label": "organic",
+            "risk_score": 67.6,
+            "top_reasons": [
+              "COORDINATED_RING_OVERLAP",
+              "BOT_OUTBOUND_BURST",
+              "ELEVATED_REPORT_VELOCITY",
+              "HIGH_BLOCK_RATIO"
+            ],
+            "attributions": {
+              "outbound_burst_velocity": 18.33,
+              "low_reciprocity_fanout": 0.0,
+              "coordinated_ring_jaccard": 21.27,
+              "report_velocity_signal": 16.0,
+              "block_ratio_signal": 12.0
+            }
+          }
+        ]
+      },
+      "risk_tier_counts": {
+        "low": 1432,
+        "medium": 1,
+        "high": 59,
+        "critical": 96
+      },
+      "dq_passed": 9,
+      "dq_total": 9,
+      "serving_rebuild_ms": 84.386,
+      "iceberg_tables": [
+        {
+          "table": "bronze.social_events",
+          "format_version": 2,
+          "rows": 46813,
+          "data_files": 1,
+          "snapshot_count": 1,
+          "current_snapshot_id": 1333176443121966113
+        },
+        {
+          "table": "bronze.quarantine_dlq",
+          "format_version": 2,
+          "rows": 40,
+          "data_files": 1,
+          "snapshot_count": 1,
+          "current_snapshot_id": 103069818149497351
+        },
+        {
+          "table": "silver.temporal_edges",
+          "format_version": 2,
+          "rows": 34358,
+          "data_files": 1,
+          "snapshot_count": 1,
+          "current_snapshot_id": 8586985691277588508
+        },
+        {
+          "table": "silver.user_blocks_and_deletions",
+          "format_version": 2,
+          "rows": 371,
+          "data_files": 1,
+          "snapshot_count": 1,
+          "current_snapshot_id": 3237536975140242781
+        },
+        {
+          "table": "silver.graph_snapshots",
+          "format_version": 2,
+          "rows": 1,
+          "data_files": 1,
+          "snapshot_count": 1,
+          "current_snapshot_id": 6797470150913666217
+        },
+        {
+          "table": "gold.adjacency_partitioned",
+          "format_version": 2,
+          "rows": 32380,
+          "data_files": 1,
+          "snapshot_count": 1,
+          "current_snapshot_id": 984260799753169087
+        },
+        {
+          "table": "gold.node_graph_features",
+          "format_version": 2,
+          "rows": 1588,
+          "data_files": 1,
+          "snapshot_count": 1,
+          "current_snapshot_id": 3839228264225852776
+        },
+        {
+          "table": "gold.communities_and_components",
+          "format_version": 2,
+          "rows": 1588,
+          "data_files": 1,
+          "snapshot_count": 1,
+          "current_snapshot_id": 5550099032767363972
+        },
+        {
+          "table": "gold.trust_risk_scores",
+          "format_version": 2,
+          "rows": 1588,
+          "data_files": 1,
+          "snapshot_count": 1,
+          "current_snapshot_id": 8759506258876867095
+        },
+        {
+          "table": "quality.dq_results",
+          "format_version": 2,
+          "rows": 9,
+          "data_files": 1,
+          "snapshot_count": 1,
+          "current_snapshot_id": 6411439118569999312
+        }
+      ],
+      "events_per_sec": 17083.2
+    },
+    {
+      "run_id": "run_stress_42_153614ae",
+      "trace_id": "5f273218fc97897a53efe941b5f7b885",
+      "profile": "stress",
+      "seed": 42,
+      "snapshot_version": 1,
+      "iceberg_edge_snapshot_id": 8416086792972353487,
+      "last_materialized_at": "2026-11-25T05:35:22.198135+00:00",
+      "total_pipeline_ms": 13420.085,
+      "total_events_generated": 194343,
+      "valid_events_ingested": 190415,
+      "duplicates_deduped": 3808,
+      "dlq_quarantined": 120,
+      "active_nodes": 5970,
+      "active_edges": 138745,
+      "temporal_edge_versions": 146908,
+      "erased_users": 30,
+      "erased_seed_users": [
+        "usr_005971",
+        "usr_005972",
+        "usr_005973",
+        "usr_005974",
+        "usr_005975",
+        "usr_005976",
+        "usr_005977",
+        "usr_005978",
+        "usr_005979",
+        "usr_005980",
+        "usr_005981",
+        "usr_005982",
+        "usr_005983",
+        "usr_005984",
+        "usr_005985",
+        "usr_005986",
+        "usr_005987",
+        "usr_005988",
+        "usr_005989",
+        "usr_005990",
+        "usr_005991",
+        "usr_005992",
+        "usr_005993",
+        "usr_005994",
+        "usr_005995",
+        "usr_005996",
+        "usr_005997",
+        "usr_005998",
+        "usr_005999",
+        "usr_006000"
+      ],
+      "blocked_pairs": 980,
+      "supernode_count": 15,
+      "component_count": 7,
+      "largest_component_size": 5850,
+      "community_count": 145,
+      "modularity_q": 0.5358,
+      "full_graph_compute_ms": 684.623,
+      "incremental_struct_ms": 14.942,
+      "incremental_with_pr_ms": 102.491,
+      "incremental_speedup_x": 45.82,
+      "incremental_parity_verified": true,
+      "incremental_max_abs_diff": 0.0,
+      "incremental_pr_max_abs_diff": 0.0,
+      "partitioning": {
+        "num_partitions": 16,
+        "supernode_threshold": 80,
+        "supernode_count": 15,
+        "naive_strategy": "naive_source_hash",
+        "naive_max_edges": 22121,
+        "naive_mean_edges": 17343.12,
+        "naive_skew_ratio": 1.275,
+        "naive_cv": 0.113,
+        "naive_two_hop_p95_ms": 8.549,
+        "vertex_cut_strategy": "skew_aware_vertex_cut",
+        "vertex_cut_max_edges": 18329,
+        "vertex_cut_mean_edges": 17343.12,
+        "vertex_cut_skew_ratio": 1.057,
+        "vertex_cut_cv": 0.0394,
+        "vertex_cut_two_hop_p95_ms": 2.659,
+        "skew_reduction_pct": 17.1,
+        "replication_factor": 1.018,
+        "naive_partition_loads": [
+          22121,
+          16744,
+          15989,
+          16728,
+          21404,
+          18843,
+          17948,
+          15237,
+          16090,
+          15264,
+          17918,
+          16391,
+          15325,
+          17564,
+          17672,
+          16252
+        ],
+        "vertex_cut_partition_loads": [
+          17870,
+          17828,
+          17580,
+          17776,
+          18321,
+          18329,
+          18039,
+          17723,
+          17163,
+          17273,
+          17153,
+          17047,
+          16449,
+          16259,
+          16357,
+          16323
+        ]
+      },
+      "sketches": {
+        "hll_precision": 10,
+        "hll_registers": 1024,
+        "hll_mean_rel_error_pct": 3.595,
+        "hll_p95_rel_error_pct": 5.02,
+        "exact_memory_bytes": 1956691200,
+        "hll_memory_bytes": 6113280,
+        "memory_reduction_ratio": 320.07,
+        "cms_depth": 5,
+        "cms_width": 2048,
+        "cms_zero_underestimation_verified": true,
+        "cms_mean_overcount": 3.7941
+      },
+      "trust_evaluation": {
+        "note": "Evaluated strictly against synthetic benchmark ground-truth labels (bot_swarm + coordinated_ring vs organic + celebrity); not real-world moderation claims.",
+        "threshold": 45.0,
+        "true_positives": 389,
+        "false_positives": 4,
+        "true_negatives": 5576,
+        "false_negatives": 1,
+        "precision": 0.9898,
+        "recall": 0.9974,
+        "f1_score": 0.9936,
+        "false_positive_rate": 0.0007,
+        "celebrity_false_positives": 0,
+        "celebrity_total": 15,
+        "false_positive_analysis": [
+          {
+            "user_id": "usr_000411",
+            "synthetic_label": "organic",
+            "risk_score": 66.98,
+            "top_reasons": [
+              "COORDINATED_RING_OVERLAP",
+              "BOT_OUTBOUND_BURST",
+              "ELEVATED_REPORT_VELOCITY",
+              "HIGH_BLOCK_RATIO"
+            ],
+            "attributions": {
+              "outbound_burst_velocity": 18.33,
+              "low_reciprocity_fanout": 0.0,
+              "coordinated_ring_jaccard": 20.65,
+              "report_velocity_signal": 16.0,
+              "block_ratio_signal": 12.0
+            }
+          },
+          {
+            "user_id": "usr_000418",
+            "synthetic_label": "organic",
+            "risk_score": 66.98,
+            "top_reasons": [
+              "COORDINATED_RING_OVERLAP",
+              "BOT_OUTBOUND_BURST",
+              "ELEVATED_REPORT_VELOCITY",
+              "HIGH_BLOCK_RATIO"
+            ],
+            "attributions": {
+              "outbound_burst_velocity": 18.33,
+              "low_reciprocity_fanout": 0.0,
+              "coordinated_ring_jaccard": 20.65,
+              "report_velocity_signal": 16.0,
+              "block_ratio_signal": 12.0
+            }
+          },
+          {
+            "user_id": "usr_000425",
+            "synthetic_label": "organic",
+            "risk_score": 65.24,
+            "top_reasons": [
+              "COORDINATED_RING_OVERLAP",
+              "BOT_OUTBOUND_BURST",
+              "ELEVATED_REPORT_VELOCITY",
+              "HIGH_BLOCK_RATIO"
+            ],
+            "attributions": {
+              "outbound_burst_velocity": 18.33,
+              "low_reciprocity_fanout": 0.0,
+              "coordinated_ring_jaccard": 18.91,
+              "report_velocity_signal": 16.0,
+              "block_ratio_signal": 12.0
+            }
+          },
+          {
+            "user_id": "usr_000432",
+            "synthetic_label": "organic",
+            "risk_score": 66.98,
+            "top_reasons": [
+              "COORDINATED_RING_OVERLAP",
+              "BOT_OUTBOUND_BURST",
+              "ELEVATED_REPORT_VELOCITY",
+              "HIGH_BLOCK_RATIO"
+            ],
+            "attributions": {
+              "outbound_burst_velocity": 18.33,
+              "low_reciprocity_fanout": 0.0,
+              "coordinated_ring_jaccard": 20.65,
+              "report_velocity_signal": 16.0,
+              "block_ratio_signal": 12.0
+            }
+          }
+        ]
+      },
+      "risk_tier_counts": {
+        "low": 5576,
+        "medium": 1,
+        "high": 123,
+        "critical": 270
+      },
+      "dq_passed": 9,
+      "dq_total": 9,
+      "serving_rebuild_ms": 204.783,
+      "iceberg_tables": [
+        {
+          "table": "bronze.social_events",
+          "format_version": 2,
+          "rows": 190415,
+          "data_files": 1,
+          "snapshot_count": 1,
+          "current_snapshot_id": 9150282128229082412
+        },
+        {
+          "table": "bronze.quarantine_dlq",
+          "format_version": 2,
+          "rows": 120,
+          "data_files": 1,
+          "snapshot_count": 1,
+          "current_snapshot_id": 1806664082030992207
+        },
+        {
+          "table": "silver.temporal_edges",
+          "format_version": 2,
+          "rows": 146908,
+          "data_files": 1,
+          "snapshot_count": 1,
+          "current_snapshot_id": 8416086792972353487
+        },
+        {
+          "table": "silver.user_blocks_and_deletions",
+          "format_version": 2,
+          "rows": 1046,
+          "data_files": 1,
+          "snapshot_count": 1,
+          "current_snapshot_id": 4924681139344522931
+        },
+        {
+          "table": "silver.graph_snapshots",
+          "format_version": 2,
+          "rows": 1,
+          "data_files": 1,
+          "snapshot_count": 1,
+          "current_snapshot_id": 5960213155692629548
+        },
+        {
+          "table": "gold.adjacency_partitioned",
+          "format_version": 2,
+          "rows": 138745,
+          "data_files": 1,
+          "snapshot_count": 1,
+          "current_snapshot_id": 7567620073366259286
+        },
+        {
+          "table": "gold.node_graph_features",
+          "format_version": 2,
+          "rows": 5970,
+          "data_files": 1,
+          "snapshot_count": 1,
+          "current_snapshot_id": 4149779495556927233
+        },
+        {
+          "table": "gold.communities_and_components",
+          "format_version": 2,
+          "rows": 5970,
+          "data_files": 1,
+          "snapshot_count": 1,
+          "current_snapshot_id": 7830460889165781553
+        },
+        {
+          "table": "gold.trust_risk_scores",
+          "format_version": 2,
+          "rows": 5970,
+          "data_files": 1,
+          "snapshot_count": 1,
+          "current_snapshot_id": 2726751506600049389
+        },
+        {
+          "table": "quality.dq_results",
+          "format_version": 2,
+          "rows": 9,
+          "data_files": 1,
+          "snapshot_count": 1,
+          "current_snapshot_id": 3063402720543692640
+        }
+      ],
+      "events_per_sec": 14327.7
+    }
+  ],
+  "iceberg_compaction": {
+    "table": "silver.temporal_edges",
+    "rows": 34356,
+    "files_before": 12,
+    "files_after": 1,
+    "scan_before_ms": 11.501,
+    "scan_after_ms": 3.921,
+    "compact_write_ms": 32.488
+  }
+}

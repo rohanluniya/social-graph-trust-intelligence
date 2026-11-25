@@ -1,0 +1,205 @@
+{
+  "mode": "local_file_openlineage_emitter",
+  "note": "OpenLineage-compatible JSON events emitted directly to disk in local_native mode; Marquez HTTP transport is configured in docker-compose.yml observability profile.",
+  "events": [
+    {
+      "eventType": "COMPLETE",
+      "eventTime": "2026-11-25T05:25:21.240623+00:00",
+      "producer": "https://github.com/ankdeshm/social-graph-trust-intelligence",
+      "schemaURL": "https://openlineage.io/spec/2-0-2/OpenLineage.json",
+      "run": {
+        "runId": "319573b0-bdba-5f77-a239-a2ea22314253",
+        "facets": {
+          "pipeline_run_id": "run_local_42_6aa46184"
+        }
+      },
+      "job": {
+        "namespace": "social_graph_trust_intelligence",
+        "name": "sgti_ingest_and_validate"
+      },
+      "inputs": [
+        {
+          "namespace": "local_iceberg_warehouse",
+          "name": "spool://social_events_topic",
+          "facets": {
+            "rowCount": null
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "namespace": "local_iceberg_warehouse",
+          "name": "bronze.social_events",
+          "facets": {
+            "rowCount": 46813
+          }
+        },
+        {
+          "namespace": "local_iceberg_warehouse",
+          "name": "bronze.quarantine_dlq",
+          "facets": {
+            "rowCount": 40
+          }
+        }
+      ]
+    },
+    {
+      "eventType": "COMPLETE",
+      "eventTime": "2026-11-25T05:25:21.240623+00:00",
+      "producer": "https://github.com/ankdeshm/social-graph-trust-intelligence",
+      "schemaURL": "https://openlineage.io/spec/2-0-2/OpenLineage.json",
+      "run": {
+        "runId": "319573b0-bdba-5f77-a239-a2ea22314253",
+        "facets": {
+          "pipeline_run_id": "run_local_42_6aa46184"
+        }
+      },
+      "job": {
+        "namespace": "social_graph_trust_intelligence",
+        "name": "sgti_temporal_edge_lifecycle"
+      },
+      "inputs": [
+        {
+          "namespace": "local_iceberg_warehouse",
+          "name": "bronze.social_events",
+          "facets": {
+            "rowCount": 46813
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "namespace": "local_iceberg_warehouse",
+          "name": "silver.temporal_edges",
+          "facets": {
+            "rowCount": 34358
+          }
+        },
+        {
+          "namespace": "local_iceberg_warehouse",
+          "name": "silver.user_blocks_and_deletions",
+          "facets": {
+            "rowCount": 371
+          }
+        },
+        {
+          "namespace": "local_iceberg_warehouse",
+          "name": "silver.graph_snapshots",
+          "facets": {
+            "rowCount": 1
+          }
+        }
+      ]
+    },
+    {
+      "eventType": "COMPLETE",
+      "eventTime": "2026-11-25T05:25:21.240623+00:00",
+      "producer": "https://github.com/ankdeshm/social-graph-trust-intelligence",
+      "schemaURL": "https://openlineage.io/spec/2-0-2/OpenLineage.json",
+      "run": {
+        "runId": "319573b0-bdba-5f77-a239-a2ea22314253",
+        "facets": {
+          "pipeline_run_id": "run_local_42_6aa46184"
+        }
+      },
+      "job": {
+        "namespace": "social_graph_trust_intelligence",
+        "name": "sgti_graph_analytics_and_partitioning"
+      },
+      "inputs": [
+        {
+          "namespace": "local_iceberg_warehouse",
+          "name": "silver.temporal_edges",
+          "facets": {
+            "rowCount": 34358
+          }
+        },
+        {
+          "namespace": "local_iceberg_warehouse",
+          "name": "bronze.social_events",
+          "facets": {
+            "rowCount": 46813
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "namespace": "local_iceberg_warehouse",
+          "name": "gold.adjacency_partitioned",
+          "facets": {
+            "rowCount": 32380
+          }
+        },
+        {
+          "namespace": "local_iceberg_warehouse",
+          "name": "gold.node_graph_features",
+          "facets": {
+            "rowCount": 1588
+          }
+        },
+        {
+          "namespace": "local_iceberg_warehouse",
+          "name": "gold.communities_and_components",
+          "facets": {
+            "rowCount": 1588
+          }
+        }
+      ]
+    },
+    {
+      "eventType": "COMPLETE",
+      "eventTime": "2026-11-25T05:25:21.240623+00:00",
+      "producer": "https://github.com/ankdeshm/social-graph-trust-intelligence",
+      "schemaURL": "https://openlineage.io/spec/2-0-2/OpenLineage.json",
+      "run": {
+        "runId": "319573b0-bdba-5f77-a239-a2ea22314253",
+        "facets": {
+          "pipeline_run_id": "run_local_42_6aa46184"
+        }
+      },
+      "job": {
+        "namespace": "social_graph_trust_intelligence",
+        "name": "sgti_explainable_trust_and_dq"
+      },
+      "inputs": [
+        {
+          "namespace": "local_iceberg_warehouse",
+          "name": "gold.node_graph_features",
+          "facets": {
+            "rowCount": 1588
+          }
+        },
+        {
+          "namespace": "local_iceberg_warehouse",
+          "name": "bronze.social_events",
+          "facets": {
+            "rowCount": 46813
+          }
+        },
+        {
+          "namespace": "local_iceberg_warehouse",
+          "name": "silver.temporal_edges",
+          "facets": {
+            "rowCount": 34358
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "namespace": "local_iceberg_warehouse",
+          "name": "gold.trust_risk_scores",
+          "facets": {
+            "rowCount": 1588
+          }
+        },
+        {
+          "namespace": "local_iceberg_warehouse",
+          "name": "quality.dq_results",
+          "facets": {
+            "rowCount": 9
+          }
+        }
+      ]
+    }
+  ]
+}

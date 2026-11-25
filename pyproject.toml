@@ -1,0 +1,98 @@
+[project]
+name = "social-graph-trust-intelligence"
+version = "0.1.0"
+description = "Billion-edge logical social graph, temporal Apache Iceberg V2 edge lakehouse, skew-aware vertex-cut partitioning, incremental graph analytics, approximate sketches, explainable trust scoring, and GDPR right-to-erasure platform."
+readme = "README.md"
+license = { text = "Apache-2.0" }
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "confluent-kafka==2.16.1",
+    "duckdb==2.0.0",
+    "fastapi==0.163.2",
+    "fastavro==1.13.1",
+    "httpx==0.28.1",
+    "matplotlib==3.11.2",
+    "numpy==2.5.5",
+    "opentelemetry-api==1.45.2",
+    "opentelemetry-sdk==1.45.2",
+    "prometheus-client==0.24.1",
+    "psutil==7.2.2",
+    "pyarrow==25.0.1",
+    "pydantic==2.14.3",
+    "pyiceberg[sql-sqlite,pyiceberg-core]==0.12.0",
+    "pyyaml==6.0.3",
+    "requests==2.34.2",
+    "scipy==1.18.1",
+    "sqlalchemy==2.1.9",
+    "uvicorn==0.54.0",
+    "zstandard==0.25.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "hypothesis==6.170.15",
+    "mypy==2.4.1",
+    "pytest==9.2.0",
+    "pytest-asyncio==1.5.0",
+    "ruff==0.17.5",
+    "types-PyYAML==6.0.12.20250915",
+    "types-requests==2.32.4.20260107",
+]
+
+# Container-isolated engine pins live in infra/docker/requirements-spark.txt and docker-compose.yml:
+# - apache/spark:4.1.4-scala2.13-java17-python3-ubuntu (PySpark 4.1.4 + GraphFrames, Java 17)
+# - apache/airflow:slim-3.4.0-python3.12
+# - trinodb/trino:484
+
+[build-system]
+requires = ["hatchling>=1.25.0"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = [
+    "social_graph",
+    "models",
+    "services",
+    "ingestion",
+]
+
+[tool.uv]
+managed = true
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+exclude = [".venv", ".local_data", ".hypothesis"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W", "UP", "B", "SIM"]
+ignore = ["E501", "B008", "SIM105"]
+
+[tool.ruff.lint.per-file-ignores]
+"services/**/*.py" = ["E402"]
+"benchmarks/**/*.py" = ["E402"]
+"scripts/**/*.py" = ["E402"]
+"processing/**/*.py" = ["E402"]
+
+[tool.mypy]
+python_version = "3.12"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+ignore_missing_imports = true
+exclude = ["^\\.venv/", "^\\.local_data/", "^processing/"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+addopts = "-q --tb=short"
+markers = [
+    "unit: fast pure-Python unit and Hypothesis property-based tests",
+    "contract: Avro schema contract and backward-compatibility tests",
+    "integration: Iceberg V2, temporal edges, privacy erasure, and FastAPI RBAC tests",
+    "e2e: full vertical-slice end-to-end tests",
+    "chaos: controlled fault-injection and recovery drills",
+    "performance: serving latency and throughput SLO checks",
+]

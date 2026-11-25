@@ -1,0 +1,40 @@
+FROM python:3.12.8-slim-bookworm
+
+COPY --from=ghcr.io/astral-sh/uv:0.12.3 /uv /usr/local/bin/uv
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    UV_COMPILE_BYTECODE=1 \
+    SGTI_RUNTIME_MODE=local_native \
+    SGTI_API_HOST=0.0.0.0 \
+    SGTI_API_PORT=8050 \
+    SGTI_DATA_DIR=/data/sgti
+
+RUN groupadd --gid 10001 sgti && \
+    useradd --uid 10001 --gid 10001 --create-home --shell /bin/bash sgti && \
+    mkdir -p /app /data/sgti && \
+    chown -R sgti:sgti /app /data/sgti
+
+WORKDIR /app
+
+COPY pyproject.toml uv.lock README.md LICENSE ./
+COPY social_graph ./social_graph
+COPY models ./models
+COPY services ./services
+COPY ingestion ./ingestion
+COPY apps ./apps
+COPY schemas ./schemas
+COPY scripts/entrypoint_standalone.sh ./scripts/entrypoint_standalone.sh
+COPY scripts/run_pipeline.py ./scripts/run_pipeline.py
+
+RUN uv sync --frozen --no-dev --python 3.12 && \
+    chmod +x /app/scripts/entrypoint_standalone.sh && \
+    chown -R sgti:sgti /app /data/sgti
+
+USER sgti
+EXPOSE 8050
+
+HEALTHCHECK --interval=15s --timeout=5s --start-period=20s --retries=3 \
+  CMD /app/.venv/bin/python -c "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8050/health')"
+
+ENTRYPOINT ["/app/scripts/entrypoint_standalone.sh"]

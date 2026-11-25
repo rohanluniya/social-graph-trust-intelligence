@@ -1,0 +1,91 @@
+{
+  "generated_at": "2026-11-25T05:40:56.437663+00:00",
+  "drills_total": 7,
+  "drills_passed": 7,
+  "drills": [
+    {
+      "drill": "drill_01_celebrity_supernode_skew_storm",
+      "status": "PASS",
+      "elapsed_ms": 5.523,
+      "metrics": {
+        "naive_skew_ratio": 3.52,
+        "vertex_cut_skew_ratio": 1.256,
+        "skew_reduction_pct": 64.32,
+        "naive_two_hop_p95_ms": 0.235,
+        "vertex_cut_two_hop_p95_ms": 0.052
+      }
+    },
+    {
+      "drill": "drill_02_bot_swarm_coordinated_burst",
+      "status": "PASS",
+      "elapsed_ms": 432.411,
+      "metrics": {
+        "precision": 0.9524,
+        "recall": 1.0,
+        "f1_score": 0.9756,
+        "celebrity_false_positives": 0
+      }
+    },
+    {
+      "drill": "drill_03_out_of_order_retraction_storm",
+      "status": "PASS",
+      "elapsed_ms": 0.167,
+      "metrics": {
+        "retractions_tested": 50,
+        "resurrected_edges": 0
+      }
+    },
+    {
+      "drill": "drill_04_gdpr_right_to_erasure_propagation",
+      "status": "PASS",
+      "elapsed_ms": 932.785,
+      "metrics": {
+        "erased_user": "usr_000001",
+        "edges_closed": 354,
+        "residual_active_edges": 0,
+        "residual_serving_records": 0,
+        "tombstone_propagation_ms": 188.1
+      }
+    },
+    {
+      "drill": "drill_05_broker_outage_spool_recovery",
+      "status": "PASS",
+      "elapsed_ms": 8.671,
+      "metrics": {
+        "buffered_during_outage": 250,
+        "recovered_from_spool": 250,
+        "valid_unique_ingested": 250,
+        "duplicates_deduped": 40
+      }
+    },
+    {
+      "drill": "drill_06_serving_cache_wipe_and_iceberg_rebuild",
+      "status": "PASS",
+      "elapsed_ms": 784.592,
+      "metrics": {
+        "counts_before": {
+          "active_nodes": 396,
+          "active_edges": 6588,
+          "erased_users": 4
+        },
+        "counts_after": {
+          "active_nodes": 396,
+          "active_edges": 6588,
+          "erased_users": 4
+        },
+        "rebuild_ms": 50.149,
+        "erased_user_remained_purged": true
+      }
+    },
+    {
+      "drill": "drill_07_schema_poison_dlq_quarantine",
+      "status": "PASS",
+      "elapsed_ms": 3.627,
+      "metrics": {
+        "valid_ingested": 100,
+        "poison_quarantined": 60,
+        "bronze_poison_leaks": 0
+      }
+    }
+  ]
+}

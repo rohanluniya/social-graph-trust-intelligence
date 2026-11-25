@@ -1,0 +1,42 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: sgti-iceberg-compaction
+  namespace: sgti-platform
+spec:
+  schedule: "30 2 * * *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 10001
+            seccompProfile:
+              type: RuntimeDefault
+          containers:
+            - name: iceberg-compactor
+              image: ghcr.io/ankdeshm/social-graph-trust-intelligence:0.1.0
+              command:
+                - /app/.venv/bin/python
+                - -c
+                - |
+                  from social_graph.config import get_config
+                  from social_graph.iceberg_store import IcebergLakehouse
+                  cfg = get_config()
+                  lh = IcebergLakehouse(cfg.catalog_db, cfg.warehouse_dir)
+                  for tbl in ("bronze.social_events", "silver.temporal_edges", "gold.adjacency_partitioned"):
+                      print(lh.compact_table(tbl))
+              securityContext:
+                allowPrivilegeEscalation: false
+                capabilities:
+                  drop: ["ALL"]
+              resources:
+                requests:
+                  cpu: "500m"
+                  memory: "1Gi"
+                limits:
+                  cpu: "2"
+                  memory: "2Gi"

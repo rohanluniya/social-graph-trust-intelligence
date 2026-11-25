@@ -1,0 +1,359 @@
+{
+  "policy": "permissive-open-source-only",
+  "pretrained_external_ml_weights": "none (zero external model downloads)",
+  "total_packages_checked": 70,
+  "flagged_count": 0,
+  "flagged": [],
+  "packages": [
+    {
+      "name": "annotated-doc",
+      "version": "0.0.6",
+      "license": "MIT"
+    },
+    {
+      "name": "annotated-types",
+      "version": "0.8.0",
+      "license": "MIT"
+    },
+    {
+      "name": "anyio",
+      "version": "4.16.0",
+      "license": "MIT"
+    },
+    {
+      "name": "ast_serialize",
+      "version": "0.13.1",
+      "license": "MIT"
+    },
+    {
+      "name": "cachetools",
+      "version": "8.0.1",
+      "license": "MIT"
+    },
+    {
+      "name": "certifi",
+      "version": "2026.10.23",
+      "license": "MPL-2.0"
+    },
+    {
+      "name": "charset-normalizer",
+      "version": "3.5.2",
+      "license": "MIT"
+    },
+    {
+      "name": "click",
+      "version": "8.5.1",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "name": "confluent-kafka",
+      "version": "2.16.1",
+      "license": "Apache Software License"
+    },
+    {
+      "name": "contourpy",
+      "version": "1.4.0",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "name": "cycler",
+      "version": "0.12.1",
+      "license": "Copyright (c) 2015, matplotlib project"
+    },
+    {
+      "name": "duckdb",
+      "version": "2.0.0",
+      "license": "MIT License"
+    },
+    {
+      "name": "fastapi",
+      "version": "0.163.2",
+      "license": "MIT"
+    },
+    {
+      "name": "fastavro",
+      "version": "1.13.1",
+      "license": "MIT"
+    },
+    {
+      "name": "fonttools",
+      "version": "4.67.0",
+      "license": "MIT"
+    },
+    {
+      "name": "fsspec",
+      "version": "2026.9.0",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "name": "h11",
+      "version": "0.16.0",
+      "license": "MIT"
+    },
+    {
+      "name": "httpcore",
+      "version": "1.0.9",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "name": "httpx",
+      "version": "0.28.1",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "name": "hypothesis",
+      "version": "6.170.15",
+      "license": "MPL-2.0"
+    },
+    {
+      "name": "idna",
+      "version": "3.20",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "name": "iniconfig",
+      "version": "2.3.1",
+      "license": "MIT"
+    },
+    {
+      "name": "kiwisolver",
+      "version": "1.5.1",
+      "license": "========================="
+    },
+    {
+      "name": "librt",
+      "version": "0.16.0",
+      "license": "MIT"
+    },
+    {
+      "name": "markdown-it-py",
+      "version": "4.3.0",
+      "license": "MIT License"
+    },
+    {
+      "name": "matplotlib",
+      "version": "3.11.2",
+      "license": "License agreement for matplotlib versions 1.3.0 and later"
+    },
+    {
+      "name": "mdurl",
+      "version": "0.1.2",
+      "license": "MIT License"
+    },
+    {
+      "name": "mmh3",
+      "version": "5.3.1",
+      "license": "MIT License"
+    },
+    {
+      "name": "mypy",
+      "version": "2.4.1",
+      "license": "MIT"
+    },
+    {
+      "name": "mypy_extensions",
+      "version": "1.2.0",
+      "license": "MIT"
+    },
+    {
+      "name": "numpy",
+      "version": "2.5.5",
+      "license": "BSD-3-Clause AND 0BSD AND MIT AND Zlib AND CC0-1.0"
+    },
+    {
+      "name": "opentelemetry-api",
+      "version": "1.45.2",
+      "license": "Apache-2.0"
+    },
+    {
+      "name": "opentelemetry-sdk",
+      "version": "1.45.2",
+      "license": "Apache-2.0"
+    },
+    {
+      "name": "opentelemetry-semantic-conventions",
+      "version": "0.66b2",
+      "license": "Apache-2.0"
+    },
+    {
+      "name": "packaging",
+      "version": "26.3",
+      "license": "Apache-2.0 OR BSD-2-Clause"
+    },
+    {
+      "name": "pathspec",
+      "version": "1.1.1",
+      "license": "Mozilla Public License 2.0 (MPL 2.0)"
+    },
+    {
+      "name": "pillow",
+      "version": "13.0.0",
+      "license": "MIT-CMU"
+    },
+    {
+      "name": "pluggy",
+      "version": "1.7.0",
+      "license": "MIT"
+    },
+    {
+      "name": "prometheus_client",
+      "version": "0.24.1",
+      "license": "Apache-2.0 AND BSD-2-Clause"
+    },
+    {
+      "name": "psutil",
+      "version": "7.2.2",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "name": "pyarrow",
+      "version": "25.0.1",
+      "license": "Apache-2.0"
+    },
+    {
+      "name": "pydantic",
+      "version": "2.14.3",
+      "license": "MIT"
+    },
+    {
+      "name": "pydantic_core",
+      "version": "2.50.4",
+      "license": "MIT"
+    },
+    {
+      "name": "Pygments",
+      "version": "2.21.0",
+      "license": "BSD-2-Clause"
+    },
+    {
+      "name": "pyiceberg",
+      "version": "0.12.0",
+      "license": "Apache-2.0"
+    },
+    {
+      "name": "pyiceberg-core",
+      "version": "0.10.1",
+      "license": "Apache Software License"
+    },
+    {
+      "name": "pyparsing",
+      "version": "3.3.3",
+      "license": "MIT"
+    },
+    {
+      "name": "pyroaring",
+      "version": "1.2.0",
+      "license": "MIT"
+    },
+    {
+      "name": "pytest",
+      "version": "9.2.0",
+      "license": "MIT"
+    },
+    {
+      "name": "pytest-asyncio",
+      "version": "1.5.0",
+      "license": "Apache-2.0"
+    },
+    {
+      "name": "python-dateutil",
+      "version": "4.0.0",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "name": "PyYAML",
+      "version": "6.0.3",
+      "license": "MIT"
+    },
+    {
+      "name": "requests",
+      "version": "2.34.2",
+      "license": "Apache-2.0"
+    },
+    {
+      "name": "rich",
+      "version": "15.0.0",
+      "license": "MIT"
+    },
+    {
+      "name": "ruff",
+      "version": "0.17.5",
+      "license": "MIT"
+    },
+    {
+      "name": "scipy",
+      "version": "1.18.1",
+      "license": "Copyright (c) 2001-2002 Enthought, Inc. 2003, SciPy Developers."
+    },
+    {
+      "name": "social-graph-trust-intelligence",
+      "version": "0.1.0",
+      "license": "Apache-2.0"
+    },
+    {
+      "name": "sortedcontainers",
+      "version": "2.4.0",
+      "license": "Apache 2.0"
+    },
+    {
+      "name": "SQLAlchemy",
+      "version": "2.1.9",
+      "license": "MIT"
+    },
+    {
+      "name": "starlette",
+      "version": "1.10.0",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "name": "strictyaml",
+      "version": "1.7.3",
+      "license": "MIT"
+    },
+    {
+      "name": "tenacity",
+      "version": "9.2.1",
+      "license": "Apache-2.0"
+    },
+    {
+      "name": "types-PyYAML",
+      "version": "6.0.12.20250915",
+      "license": "Apache-2.0"
+    },
+    {
+      "name": "types-requests",
+      "version": "2.32.4.20260107",
+      "license": "Apache-2.0"
+    },
+    {
+      "name": "typing-inspection",
+      "version": "0.4.5",
+      "license": "MIT"
+    },
+    {
+      "name": "typing_extensions",
+      "version": "4.16.0",
+      "license": "PSF-2.0"
+    },
+    {
+      "name": "tzdata",
+      "version": "2026.6",
+      "license": "Apache-2.0"
+    },
+    {
+      "name": "urllib3",
+      "version": "2.8.0",
+      "license": "MIT"
+    },
+    {
+      "name": "uvicorn",
+      "version": "0.54.0",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "name": "zstandard",
+      "version": "0.25.0",
+      "license": "BSD-3-Clause"
+    }
+  ]
+}

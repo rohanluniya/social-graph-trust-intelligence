@@ -1,0 +1,97 @@
+{
+  "type": "record",
+  "name": "SocialGraphEvent",
+  "namespace": "com.socialgraph.events.v1",
+  "doc": "Backward-compatible v2 social event contract adding optional telemetry and privacy metadata.",
+  "fields": [
+    {
+      "name": "event_id",
+      "type": "string",
+      "doc": "Deterministic globally unique event identifier used for idempotent deduplication."
+    },
+    {
+      "name": "event_type",
+      "type": {
+        "type": "enum",
+        "name": "SocialEventType",
+        "symbols": [
+          "user_created",
+          "follow",
+          "unfollow",
+          "block",
+          "unblock",
+          "post_created",
+          "reaction",
+          "comment",
+          "share",
+          "report",
+          "user_deleted"
+        ]
+      },
+      "doc": "Domain event category."
+    },
+    {
+      "name": "actor_id",
+      "type": "string",
+      "doc": "Stable user identifier initiating the event (e.g. usr_000001)."
+    },
+    {
+      "name": "target_id",
+      "type": ["null", "string"],
+      "default": null,
+      "doc": "Target user identifier for directed graph edges, blocks, or reports."
+    },
+    {
+      "name": "post_id",
+      "type": ["null", "string"],
+      "default": null,
+      "doc": "Target post identifier for post_created, reaction, comment, or share events."
+    },
+    {
+      "name": "event_ts",
+      "type": "long",
+      "doc": "Authoritative event timestamp in UTC epoch milliseconds."
+    },
+    {
+      "name": "ingest_ts",
+      "type": "long",
+      "doc": "Platform ingestion timestamp in UTC epoch milliseconds."
+    },
+    {
+      "name": "source_system",
+      "type": "string",
+      "default": "social-core-oltp",
+      "doc": "Originating producer service or CDC connector."
+    },
+    {
+      "name": "schema_version",
+      "type": "int",
+      "default": 2,
+      "doc": "Contract version integer."
+    },
+    {
+      "name": "metadata_json",
+      "type": "string",
+      "default": "{}",
+      "doc": "Compact JSON string of non-PII event attributes."
+    },
+    {
+      "name": "client_asn",
+      "type": ["null", "string"],
+      "default": null,
+      "doc": "Optional coarsened autonomous system network group (non-PII) added in v2."
+    },
+    {
+      "name": "trace_id",
+      "type": ["null", "string"],
+      "default": null,
+      "doc": "Optional distributed tracing correlation identifier added in v2."
+    },
+    {
+      "name": "privacy_flag",
+      "type": "string",
+      "default": "standard",
+      "doc": "Privacy classification (standard, erasure_request, restricted) added in v2."
+    }
+  ]
+}

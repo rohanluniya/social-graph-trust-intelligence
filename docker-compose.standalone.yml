@@ -1,0 +1,34 @@
+name: social-graph-trust-standalone
+
+services:
+  sgti-standalone:
+    build:
+      context: .
+      dockerfile: infra/docker/Dockerfile.standalone
+    image: social-graph-trust-intelligence:0.1.0
+    ports:
+      - "127.0.0.1:8050:8050"
+    environment:
+      SGTI_RUNTIME_MODE: "local_native"
+      SGTI_API_HOST: "0.0.0.0"
+      SGTI_API_PORT: "8050"
+      SGTI_DATA_DIR: "/data/sgti"
+      SGTI_PROFILE: "local"
+      SGTI_SEED: "42"
+      SGTI_VIEWER_API_KEY: "${SGTI_VIEWER_API_KEY:-dev-viewer-key-local-only}"
+      SGTI_ANALYST_API_KEY: "${SGTI_ANALYST_API_KEY:-dev-analyst-key-local-only}"
+      SGTI_ADMIN_API_KEY: "${SGTI_ADMIN_API_KEY:-dev-admin-key-local-only}"
+    volumes:
+      - sgti_standalone_data:/data/sgti
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import urllib.request; urllib.request.urlopen('http://127.0.0.1:8050/health')\""]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          memory: 2048M
+
+volumes:
+  sgti_standalone_data:

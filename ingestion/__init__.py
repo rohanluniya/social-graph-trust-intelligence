@@ -1,0 +1,1 @@
+"""Ingestion adapters (Kafka & CDC)."""

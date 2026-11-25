@@ -1,0 +1,61 @@
+name: CI — Social Graph & Trust Intelligence
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  fast-quality-and-tests:
+    name: Lint, Typecheck, Security Audit & Test Suite
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          version: "0.12.3"
+          python-version: "3.12.8"
+
+      - name: Sync locked environment
+        run: uv sync --frozen --extra dev
+
+      - name: Ruff lint
+        run: uv run ruff check .
+
+      - name: Mypy static type check
+        run: uv run mypy social_graph models services ingestion
+
+      - name: Static security, pinning & license audit
+        run: |
+          uv run python scripts/static_audit.py
+          uv run python scripts/check_licenses.py
+          uv run python scripts/generate_sbom.py
+
+      - name: Run unit, contract, integration, e2e, performance & chaos tests
+        run: uv run pytest -v --junitxml=results/tests/ci_junit.xml
+
+  distributed-container-validation:
+    name: Standalone Container Build & Health Check
+    runs-on: ubuntu-24.04
+    if: github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate Compose configurations
+        run: |
+          docker compose -f docker-compose.standalone.yml config > /dev/null
+          docker compose -f docker-compose.yml --profile core config > /dev/null
+          docker compose -f docker-compose.yml --profile analytics config > /dev/null
+          docker compose -f docker-compose.yml --profile observability config > /dev/null
+
+      - name: Build standalone image
+        run: docker build -f infra/docker/Dockerfile.standalone -t social-graph-trust-intelligence:0.1.0 .

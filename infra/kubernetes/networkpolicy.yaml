@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: sgti-api-netpol
+  namespace: sgti-platform
+spec:
+  podSelector:
+    matchLabels:
+      app: sgti-api
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    - ports:
+        - protocol: TCP
+          port: 8050
+  egress:
+    - ports:
+        - protocol: TCP
+          port: 4317
+        - protocol: TCP
+          port: 5432
+        - protocol: TCP
+          port: 8181
+        - protocol: TCP
+          port: 9000
+        - protocol: UDP
+          port: 53

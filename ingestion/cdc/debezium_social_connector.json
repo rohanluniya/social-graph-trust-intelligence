@@ -1,0 +1,28 @@
+{
+  "name": "sgti-postgres-social-oltp-cdc",
+  "config": {
+    "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+    "tasks.max": "1",
+    "database.hostname": "postgres-oltp",
+    "database.port": "5432",
+    "database.user": "${file:/etc/kafka-connect/secrets.properties:pg_cdc_user}",
+    "database.password": "${file:/etc/kafka-connect/secrets.properties:pg_cdc_password}",
+    "database.dbname": "social_graph_oltp",
+    "topic.prefix": "sgti.cdc",
+    "plugin.name": "pgoutput",
+    "publication.name": "sgti_social_pub",
+    "slot.name": "sgti_social_slot",
+    "table.include.list": "public.social_users,public.social_edges,public.social_blocks,public.social_erasure_requests",
+    "tombstones.on.delete": "true",
+    "decimal.handling.mode": "double",
+    "time.precision.mode": "adaptive_time_microseconds",
+    "key.converter": "io.apicurio.registry.utils.converter.AvroConverter",
+    "value.converter": "io.apicurio.registry.utils.converter.AvroConverter",
+    "key.converter.apicurio.registry.url": "http://apicurio-registry:8080/apis/registry/v3",
+    "value.converter.apicurio.registry.url": "http://apicurio-registry:8080/apis/registry/v3",
+    "transforms": "route",
+    "transforms.route.type": "org.apache.kafka.connect.transforms.RegexRouter",
+    "transforms.route.regex": "sgti\\.cdc\\.public\\.(.*)",
+    "transforms.route.replacement": "social.events.raw.$1"
+  }
+}

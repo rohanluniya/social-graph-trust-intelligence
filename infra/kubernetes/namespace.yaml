@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: sgti-platform
+  labels:
+    app.kubernetes.io/part-of: social-graph-trust-intelligence
+    pod-security.kubernetes.io/enforce: restricted

@@ -1,0 +1,14 @@
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.17.5
+    hooks:
+      - id: ruff
+        args: [--fix]
+      - id: ruff-format
+  - repo: local
+    hooks:
+      - id: static-audit
+        name: Static Security & Pinning Audit
+        entry: uv run python scripts/static_audit.py
+        language: system
+        pass_filenames: false

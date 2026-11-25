@@ -1,0 +1,56 @@
+{
+  "title": "Social Graph & Trust Intelligence — Operational Overview",
+  "uid": "sgti-ops-overview",
+  "schemaVersion": 39,
+  "version": 1,
+  "refresh": "15s",
+  "panels": [
+    {
+      "id": 1,
+      "type": "stat",
+      "title": "Active Directed Edges",
+      "gridPos": { "h": 4, "w": 6, "x": 0, "y": 0 },
+      "targets": [{ "expr": "sgti_active_edges", "refId": "A" }]
+    },
+    {
+      "id": 2,
+      "type": "stat",
+      "title": "Active Nodes",
+      "gridPos": { "h": 4, "w": 6, "x": 6, "y": 0 },
+      "targets": [{ "expr": "sgti_active_nodes", "refId": "A" }]
+    },
+    {
+      "id": 3,
+      "type": "stat",
+      "title": "DQ Checks Failed",
+      "gridPos": { "h": 4, "w": 6, "x": 12, "y": 0 },
+      "targets": [{ "expr": "sgti_dq_checks_failed", "refId": "A" }]
+    },
+    {
+      "id": 4,
+      "type": "gauge",
+      "title": "Vertex-Cut Partition Skew Ratio",
+      "gridPos": { "h": 4, "w": 6, "x": 18, "y": 0 },
+      "targets": [{ "expr": "sgti_partition_skew_ratio{strategy=\"skew_aware_vertex_cut\"}", "refId": "A" }]
+    },
+    {
+      "id": 5,
+      "type": "timeseries",
+      "title": "API Request Rate by Path",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 4 },
+      "targets": [{ "expr": "sum by (path) (rate(sgti_api_requests_total[1m]))", "refId": "A" }]
+    },
+    {
+      "id": 6,
+      "type": "timeseries",
+      "title": "GDPR Erasure Propagation Latency (p95 ms)",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 4 },
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.95, sum(rate(sgti_erasure_propagation_ms_bucket[5m])) by (le))",
+          "refId": "A"
+        }
+      ]
+    }
+  ]
+}

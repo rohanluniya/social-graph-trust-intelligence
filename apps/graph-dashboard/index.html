@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Social Graph &amp; Trust Intelligence — Control Tower</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-icon" aria-hidden="true">
+        <svg viewBox="0 0 28 28" width="24" height="24" fill="none">
+          <circle cx="14" cy="14" r="4" fill="#38bdf8"/>
+          <circle cx="5" cy="7" r="2.6" fill="#818cf8"/>
+          <circle cx="23" cy="7" r="2.6" fill="#34d399"/>
+          <circle cx="6" cy="21" r="2.6" fill="#f472b6"/>
+          <circle cx="22" cy="21" r="2.6" fill="#fbbf24"/>
+          <path d="M7.2 8.4L11.2 11.7M20.8 8.4L16.8 11.7M8.1 19.6L11.4 16.4M19.9 19.6L16.6 16.4" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div>
+        <h1>Social Graph &amp; Trust Intelligence</h1>
+        <p class="subtitle">Apache Iceberg V2 Temporal Graph Lakehouse &bull; Skew-Aware Vertex-Cut &bull; Explainable Trust &amp; GDPR Erasure</p>
+      </div>
+    </div>
+
+    <div class="topbar-meta">
+      <div class="pill pill-live"><span class="dot"></span><span id="health-status">Loading...</span></div>
+      <div class="pill pill-neutral">Snapshot <strong id="snap-version">—</strong></div>
+      <div class="pill pill-neutral">Freshness <strong id="freshness-val">—</strong></div>
+      <div class="auth-control">
+        <label for="role-select">RBAC Scope</label>
+        <select id="role-select">
+          <option value="dev-admin-key-local-only" selected>admin (erasure enabled)</option>
+          <option value="dev-analyst-key-local-only">analyst (read-only)</option>
+          <option value="dev-viewer-key-local-only">viewer (read-only)</option>
+        </select>
+      </div>
+      <button id="refresh-btn" class="btn btn-secondary" type="button">Refresh</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- KPI Strip -->
+    <section class="kpi-grid" aria-label="Platform key metrics">
+      <article class="kpi-card">
+        <span class="kpi-label">Active Directed Graph</span>
+        <div class="kpi-value" id="kpi-edges">—</div>
+        <div class="kpi-sub" id="kpi-nodes-sub">— active nodes &bull; — erased</div>
+      </article>
+      <article class="kpi-card">
+        <span class="kpi-label">Supernode Skew Mitigation</span>
+        <div class="kpi-value accent-cyan" id="kpi-skew">—</div>
+        <div class="kpi-sub" id="kpi-skew-sub">Naive vs Vertex-Cut &bull; 2-hop p95</div>
+      </article>
+      <article class="kpi-card">
+        <span class="kpi-label">Incremental vs Full Parity</span>
+        <div class="kpi-value accent-emerald" id="kpi-parity">—</div>
+        <div class="kpi-sub" id="kpi-parity-sub">Max abs diff &bull; structural speedup</div>
+      </article>
+      <article class="kpi-card">
+        <span class="kpi-label">Trust Detection (Synthetic GT)</span>
+        <div class="kpi-value accent-indigo" id="kpi-trust-f1">—</div>
+        <div class="kpi-sub" id="kpi-trust-sub">Precision / Recall &bull; Celeb FPR</div>
+      </article>
+      <article class="kpi-card">
+        <span class="kpi-label">HLL 2-Hop Reach Sketch</span>
+        <div class="kpi-value accent-amber" id="kpi-hll">—</div>
+        <div class="kpi-sub" id="kpi-hll-sub">Memory reduction &bull; mean rel error</div>
+      </article>
+      <article class="kpi-card">
+        <span class="kpi-label">Data Quality &amp; DLQ</span>
+        <div class="kpi-value accent-emerald" id="kpi-dq">—</div>
+        <div class="kpi-sub" id="kpi-dq-sub">Checks passed &bull; poison quarantined</div>
+      </article>
+    </section>
+
+    <!-- Row 2: Partitioning Telemetry + Interactive Node Trust & GDPR Erasure Inspector -->
+    <section class="two-col-grid">
+      <article class="panel">
+        <div class="panel-header">
+          <div>
+            <h2>Partition Load Balance: Naive Hash vs. Skew-Aware Vertex-Cut</h2>
+            <p class="panel-desc">16 adjacency shards &bull; celebrity supernodes salted across mirror partitions to eliminate 2-hop stragglers</p>
+          </div>
+          <span class="badge badge-cyan" id="supernode-badge">— supernodes</span>
+        </div>
+        <div class="chart-legend">
+          <span><i class="swatch swatch-naive"></i>Naive Source/Node Hash</span>
+          <span><i class="swatch swatch-vc"></i>Skew-Aware Vertex-Cut (Salted)</span>
+        </div>
+        <div id="partition-chart" class="svg-chart-wrap"></div>
+        <div class="mini-metrics-row" id="partition-stats-row"></div>
+      </article>
+
+      <article class="panel inspector-panel">
+        <div class="panel-header">
+          <div>
+            <h2>Interactive Node Trust &amp; Privacy Inspector</h2>
+            <p class="panel-desc">Inspect graph topology, HLL vs exact 2-hop reach, reason codes, or trigger live GDPR Article 17 erasure</p>
+          </div>
+          <span class="badge" id="insp-tier-badge">Select node</span>
+        </div>
+
+        <form id="node-search-form" class="search-row">
+          <input id="node-search-input" type="text" placeholder="Enter user ID (e.g. usr_000010, usr_000001)..." autocomplete="off" />
+          <button type="submit" class="btn btn-primary">Inspect</button>
+          <button type="button" id="inspect-celeb-btn" class="btn btn-ghost">Celebrity Hub</button>
+          <button type="button" id="inspect-top-alert-btn" class="btn btn-ghost">Top Risk Alert</button>
+        </form>
+
+        <div id="node-inspector-body" class="inspector-body">
+          <div class="empty-state">Loading top flagged node...</div>
+        </div>
+
+        <div class="erasure-bar">
+          <div>
+            <strong>GDPR Right-to-Erasure Verification</strong>
+            <p class="panel-desc">Purges active Iceberg V2 edges, gold features, and serving caches with zero-leak assertion.</p>
+          </div>
+          <button id="erase-node-btn" type="button" class="btn btn-danger">Erase Selected User</button>
+        </div>
+        <div id="erasure-receipt" class="receipt-box hidden"></div>
+      </article>
+    </section>
+
+    <!-- Row 3: Explainable Trust & Abuse Alerts + Synthetic Ground-Truth Evaluation -->
+    <section class="panel">
+      <div class="panel-header">
+        <div>
+          <h2>Explainable Trust &amp; Abuse Intelligence Alerts</h2>
+          <p class="panel-desc">Rule + feature-attributed signals evaluated strictly against synthetic benchmark labels (not real-world moderation claims)</p>
+        </div>
+        <div class="eval-pills" id="trust-eval-pills"></div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="data-table" id="alerts-table">
+          <thead>
+            <tr>
+              <th>User ID</th>
+              <th>Risk Score</th>
+              <th>Tier</th>
+              <th>Synthetic Cohort</th>
+              <th>In / Out Deg</th>
+              <th>Recip.</th>
+              <th>Ring Jaccard</th>
+              <th>CMS Burst</th>
+              <th>Explainable Reason Codes</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="alerts-tbody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Row 4: Communities / Components + Iceberg Medallion & Data Quality -->
+    <section class="two-col-grid">
+      <article class="panel">
+        <div class="panel-header">
+          <div>
+            <h2>Detected Communities &amp; Connected Components</h2>
+            <p class="panel-desc">Degree-dampened deterministic Label Propagation preventing celebrity supernode cluster collapse</p>
+          </div>
+          <span class="badge badge-indigo" id="modularity-badge">Modularity Q = —</span>
+        </div>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Community</th>
+                <th>Members</th>
+                <th>Avg Risk</th>
+                <th>High-Risk</th>
+                <th>Avg Clustering</th>
+                <th>Max In-Deg</th>
+              </tr>
+            </thead>
+            <tbody id="communities-tbody"></tbody>
+          </table>
+        </div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-header">
+          <div>
+            <h2>Data Quality Suite, Quarantine DLQ &amp; Iceberg V2 Inventory</h2>
+            <p class="panel-desc">Automated schema, temporal edge, privacy zero-leak, and incremental parity assertions</p>
+          </div>
+          <span class="badge badge-emerald" id="dq-summary-badge">— / — PASS</span>
+        </div>
+        <div class="dq-list" id="dq-list"></div>
+        <h3 class="sub-heading">Apache Iceberg V2 Medallion Tables</h3>
+        <div class="iceberg-grid" id="iceberg-grid"></div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>Social Graph &amp; Trust Intelligence Platform &bull; Local Native Runtime (Apache Iceberg V2 + DuckDB + SciPy Sparse CSR + FastAPI)</span>
+    <span id="footer-run-id">Run ID: —</span>
+  </footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
